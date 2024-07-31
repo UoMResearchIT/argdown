@@ -2,7 +2,7 @@
 name = "argdown"
 version = "1.2.0"
 description = "Markdown export for the argparse module"
-authors = ["Rebecca Turner"]
+authors = ["Rebecca Turner", "Martin Herrerias"]
 license = "MIT"
 readme = "README.rst"
 homepage = "https://github.com/UoMResearchIT/argdown"
