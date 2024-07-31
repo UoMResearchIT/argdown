@@ -1,11 +1,10 @@
-import argparse as _argparse
-# table col
-import os as _os
-# output
-import textwrap as _textwrap
+import argparse
+import os
+import textwrap
+import sys
+import importlib.metadata
 
-version = '1.1.0'
-cols = _os.environ['COLUMNS'] if 'COLUMNS' in _os.environ else 78
+cols = os.environ['COLUMNS'] if 'COLUMNS' in os.environ else 78
 
 def md_help(parser, *, depth=1, header='Arguments and Usage',
         usage_header='Usage', ref_header='Quick reference table',
@@ -121,8 +120,8 @@ def md_help(parser, *, depth=1, header='Arguments and Usage',
         default_str = ''
         if (show_default and
             not (isinstance(action.default, bool)
-            or isinstance(action, _argparse._VersionAction)
-            or isinstance(action, _argparse._HelpAction))):
+            or isinstance(action, argparse._VersionAction)
+            or isinstance(action, argparse._HelpAction))):
             default = action.default if isinstance(action.default, str) else repr(action.default)
             options[i]['default'] = inline_code(default)
             table_widths.maximize('default', options[i]['default'])
@@ -133,7 +132,7 @@ def md_help(parser, *, depth=1, header='Arguments and Usage',
         args_detailed += (header_text(
             inline_code(f'{icd}, {icd}'.join(action.option_strings))
             + default_str, depth + 2)
-            + _textwrap.fill(action.help, width=cols) + '\n\n')
+            + textwrap.fill(action.help, width=cols) + '\n\n')
         i += 1
 
     # with proper lengths, we can make the table
@@ -159,7 +158,7 @@ def console():
     prog = 'argdown'
     global cols
 
-    argparser = _argparse.ArgumentParser(
+    argparser = argparse.ArgumentParser(
         description='Markdown export for the argparse module',
         prog=prog,
         epilog=
@@ -235,7 +234,7 @@ More info: github.com/9999years/argdown''')
         'to define the argument parser.')
 
     argparser.add_argument('-v', '--version', action='version',
-        version=f'%(prog)s {version}')
+        version=f'%(prog)s {importlib.metadata.version(prog)}')
 
     args = argparser.parse_args()
 
