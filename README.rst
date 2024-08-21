@@ -1,3 +1,7 @@
+> [!CAUTION]
+> Don't use this repo, the propper way to do it is to write a custom `argparse.RawDescriptionHelpFormatter`
+> See e.g. https://chromium.googlesource.com/catapult.git/+/HEAD/devil/devil/utils/markdown.py
+
 argdown
 #######
 
